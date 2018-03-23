@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<configuration xmlns="hybris.de/schemas/hmc/generic"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="hybris.de/schemas/hmc/generic hmc.xsd">
+
+    <!-- Configuration for extension myextension -->
+    <explorertree>
+        <group name="myextensiongroup">
+            <typeref type="Car"/>
+            <typeref type="Owner"/>
+            <typeref type="Parking"/>
+            <typeref type="ParkingPlace"/>
+            <typeref type="ParkingOrder"/>
+        </group>
+    </explorertree>
+
+    <!--hMC for car-->
+    <type name="Car" mode="append">
+        <organizer>
+            <search mode="replace">
+                <condition attribute="type"/>
+                <condition attribute="governmentNumber"/>
+                <condition attribute="carName"/>
+                <condition attribute="model"/>
+            </search>
+            <result>
+                <listview mode="replace">
+                    <itemlayout>
+                        <attribute name="type"/>
+                        <attribute name="governmentNumber"/>
+                        <attribute name="carName"/>
+                        <attribute name="model"/>
+                    </itemlayout>
+                </listview>
+            </result>
+            <editor>
+                <essentials>
+                    <listlayout>
+                        <attribute name="type"/>
+                    </listlayout>
+                </essentials>
+                <tab name="tab.myextension">
+                    <section name="section.myextension">
+                        <listlayout>
+                            <attribute name="model"/>
+                            <attribute name="governmentNumber"/>
+                            <attribute name="carName"/>
+                        </listlayout>
+                    </section>
+                </tab>
+            </editor>
+        </organizer>
+    </type>
+
+    <!--hMC for parking-->
+    <type name="Parking" mode="append">
+        <organizer>
+            <search mode="replace">
+                <condition attribute="capacity"/>
+            </search>
+            <result>
+                <listview mode="replace">
+                    <itemlayout>
+                        <attribute name="capacity"/>
+
+                    </itemlayout>
+                </listview>
+            </result>
+            <editor>
+                <tab name="tab.myextension">
+                    <section name="section.myextension">
+                        <listlayout>
+                            <attribute name="capacity"/>
+                        </listlayout>
+                    </section>
+                </tab>
+            </editor>
+        </organizer>
+    </type>
+
+    <!--Parking place for car-->
+    <type name="ParkingPlace" mode="append">
+        <organizer>
+            <search mode="replace">
+                <condition attribute="car"/>
+            </search>
+            <result>
+                <listview mode="replace">
+                    <itemlayout>
+                        <attribute name="car"/>
+                    </itemlayout>
+                </listview>
+            </result>
+            <editor>
+                <essentials>
+                    <listlayout>
+                        <attribute name="car"/>
+                    </listlayout>
+                </essentials>
+            </editor>
+        </organizer>
+    </type>
+
+    <!--hMC for car owner-->
+    <type name="Owner" mode="append">
+        <organizer>
+            <search mode="replace">
+                <condition attribute="firstName"/>
+                <condition attribute="lastName"/>
+            </search>
+            <result>
+                <listview mode="replace">
+                    <itemlayout>
+                        <attribute name="firstName"/>
+                        <attribute name="lastName"/>
+                    </itemlayout>
+                </listview>
+            </result>
+            <editor>
+                <tab name="tab.myextension">
+                    <section name="section.myextension">
+                        <listlayout>
+                            <attribute name="firstName"/>
+                            <attribute name="lastName"/>
+                        </listlayout>
+                    </section>
+                </tab>
+            </editor>
+        </organizer>
+    </type>
+
+    <!--hMC for parking order-->
+    <type name="ParkingOrder" mode="append">
+        <organizer>
+            <search mode="replace">
+                <condition attribute="priceInHour"/>
+                <condition attribute="arrivalTime"/>
+                <condition attribute="endTime"/>
+                <condition attribute="total"/>
+                <condition attribute="car"/>
+                <condition attribute="parkingPlace"/>
+            </search>
+            <result>
+                <listview mode="replace">
+                    <itemlayout>
+                        <attribute name="priceInHour"/>
+                        <attribute name="arrivalTime"/>
+                        <attribute name="endTime"/>
+                        <attribute name="total"/>
+                        <attribute name="car"/>
+                        <attribute name="parkingPlace"/>
+                    </itemlayout>
+                </listview>
+            </result>
+            <editor>
+                <tab name="tab.myextension">
+                    <section name="section.myextension">
+                        <listlayout>
+                            <attribute name="priceInHour"/>
+                            <attribute name="arrivalTime"/>
+                            <attribute name="endTime"/>
+                            <attribute name="total"/>
+                            <attribute name="car"/>
+                            <attribute name="parkingPlace"/>
+                        </listlayout>
+                    </section>
+                </tab>
+            </editor>
+        </organizer>
+    </type>
+</configuration>

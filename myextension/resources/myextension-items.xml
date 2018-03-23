@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:noNamespaceSchemaLocation="items.xsd">
+
+    <!--Enumeration for sample car types-->
+    <enumtypes>
+        <enumtype code="CarType" dynamic="false">
+            <value code="SEDAN"></value>
+            <value code="HATCHBACK"></value>
+            <value code="MINIVAN"></value>
+            <value code="CROSSOVER"></value>
+        </enumtype>
+    </enumtypes>
+
+    <!--Relation ONE to MANY between Owner and cars-->
+    <relations>
+        <relation code="CarsToOwner" localized="false">
+            <sourceElement type="Owner" qualifier="carOwner" cardinality="one"></sourceElement>
+            <targetElement type="Car" qualifier="cars"  cardinality="many"></targetElement>
+        </relation>
+        <relation code="ParkingPlaceToParking" localized="false">
+            <sourceElement type="Parking" qualifier="parking" cardinality="one"></sourceElement>
+            <targetElement type="ParkingPlace" qualifier="parkingPlace"  cardinality="many"></targetElement>
+        </relation>
+    </relations>
+
+    <!--Items list for MyExtension extension-->
+	<itemtypes>
+        <!--ItemType for parking order-->
+        <itemtype code="ParkingOrder" generate="true" autocreate="true">
+            <deployment table="ParkingOrders" typecode='13000'/>
+            <attributes>
+                <attribute qualifier="priceInHour" type="java.lang.Integer">
+                    <description>price for parking till one hour</description>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="arrivalTime" type="java.util.Date">
+                    <description>time when car arrived</description>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="endTime" type="java.util.Date">
+                    <description>end time</description>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="total" type="java.lang.Integer">
+                    <description>total price</description>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="car" type="Car">
+                    <description>car</description>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="parkingPlace" type="ParkingPlace">
+                    <description>parking place</description>
+                    <persistence type="property"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <!--ItemType for cars-->
+        <itemtype code="Car">
+            <deployment table="Car" typecode='13001'/>
+                <attributes>
+                    <attribute qualifier="type" type="CarType">
+                        <description>Car type</description>
+                        <defaultvalue>em().getEnumerationValue("type","Sedan")</defaultvalue>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="governmentNumber" type="java.lang.Integer">
+                        <description>Goverment number of the car</description>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="carName" type="java.lang.String">
+                        <description>name</description>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="model" type="java.lang.String">
+                        <description>Car model</description>
+                        <persistence type="property"/>
+                    </attribute>
+                </attributes>
+        </itemtype>
+
+        <!--ItemType for car owners, Owner related to cars with ONE to MANY relation-->
+        <itemtype code="Owner" extends="User">
+            <attributes>
+                <attribute qualifier="firstName" type="java.lang.String">
+                    <description>First Name</description>
+                    <persistence type="property"></persistence>
+                </attribute>
+                <attribute qualifier="lastName" type="java.lang.String">
+                    <description>Last Name</description>
+                    <persistence type="property"></persistence>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <!--Parking with some amount of parking plases-->
+        <itemtype code="Parking">
+            <deployment table="Parking" typecode='13002'/>
+            <attributes>
+                <attribute qualifier="capacity" type="java.lang.Integer">
+                    <description>Capacity</description>
+                    <persistence type="property"></persistence>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <!--Parking place for storing the car-->
+        <itemtype code="ParkingPlace">
+            <deployment table="ParkingPlace" typecode="13003"/>
+            <attributes>
+                <attribute qualifier="placed" type="java.lang.Integer">
+                    <description>Start count from</description>
+                    <persistence type="property"></persistence>
+                </attribute>
+                <attribute qualifier="estimate" type="java.lang.Integer">
+                    <description>Estimate time</description>
+                    <persistence type="property"></persistence>
+                </attribute>
+            </attributes>
+        </itemtype>
+	</itemtypes>
+</items>
